@@ -1,7 +1,7 @@
 var VideoList = (props) => (
   <div className="video-list">
      {props.videos.map(vid =>
-        <VideoListEntry video={vid}/>
+        <VideoListEntry titleSelect={props.selectedVid} video={vid}/>
      )}
   </div>
 );
@@ -10,6 +10,7 @@ var VideoList = (props) => (
 // Warnings will be shown in the console when the defined rules are violated
 VideoList.propTypes = {
   videos: React.PropTypes.array.isRequired
+  //selectedVid
 };
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope.

@@ -3,14 +3,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      vidClick: false
+      //data in state
+      //current video in state
+      vidData: window.exampleVideoData,
+      currentVid: window.exampleVideoData[0]
     };
   }
   
   handleClick() {
-    this.setState({
-      vidClick: !this.state.vidClick
-    });
+    //uncomment this
+      //but need to change the current video
+    // this.setState({
+    //   //this.currentVid: 
+    // });
     console.log('clicked');
   }
   
@@ -24,10 +29,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><VideoPlayer video={window.exampleVideoData[0]}/></div>
+            <div><VideoPlayer video={this.state.currentVid}/></div>
           </div>
           <div className="col-md-5">
-            <div><VideoList videos={window.exampleVideoData} selectedVid={this.handleClick}/></div>
+            <div><VideoList videos={this.state.vidData} selectedVid={this.handleClick}/></div>
           </div>
         </div>
       </div>
