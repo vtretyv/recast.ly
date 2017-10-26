@@ -24,6 +24,4 @@ window.VideoList = VideoList;
  //       <li class="media-player">{video}</li>
  //     )}
  
- var temp = function() {
-   
- };
+ 
