@@ -3,20 +3,40 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //data in state
-      //current video in state
       vidData: window.exampleVideoData,
-      currentVid: window.exampleVideoData[0]
+      currentVid: window.exampleVideoData[0]//Can change to this.state.vidData[index];
     };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.searchHelperCB = this.searchHelperCB.bind(this);
   }
   
-  handleClick() {
-    //uncomment this
-      //but need to change the current video
-    // this.setState({
-    //   //this.currentVid: 
-    // });
-    console.log('clicked');
+  handleSearch(searchVidName) {
+    let data = {
+      q: searchVidName,
+      maxResults: 5,
+      part: 'snippet',
+      key: window.YOUTUBE_API_KEY,
+      chart: 'mostPopular'
+    };
+    searchYouTube(data, this.searchHelperCB);
+    //var newestSearch = searchYouTube(data, this.searchHelperCB);
+    //_.debounce(newestSearch, 2000);
+
+  }
+  searchHelperCB(data) {
+    console.log('DATA', data);
+    this.setState({
+      vidData: data,
+      currentVid: data[0]
+    });
+  }
+  
+  handleClick(curVid) {
+    //need to change the current video
+    this.setState({
+      currentVid: curVid
+    });
   }
   
   render () {
@@ -24,7 +44,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <div><Search searchButton={this.handleSearch}/></div>
           </div>
         </nav>
         <div className="row">
