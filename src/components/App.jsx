@@ -11,6 +11,18 @@ class App extends React.Component {
     this.searchHelperCB = this.searchHelperCB.bind(this);
   }
   
+  // componentDidMount() {
+  //   var data = {key: window.YOUTUBE_API_KEY, q:'cats', maxResults: 10 };
+    
+  //   //FROM SOLUTION
+  //   this.props.searchYouTube(data, (videos) =>
+  //     this.setState({
+  //       videos: videos,
+  //       currentVideo: videos[0]
+  //     })
+  //   );
+  // }
+  
   handleSearch(searchVidName) {
     let data = {
       q: searchVidName,
@@ -19,11 +31,13 @@ class App extends React.Component {
       key: window.YOUTUBE_API_KEY,
       chart: 'mostPopular'
     };
-    searchYouTube(data, this.searchHelperCB);
-    //var newestSearch = searchYouTube(data, this.searchHelperCB);
-    //_.debounce(newestSearch, 2000);
-
+    //searchYouTube(data, this.searchHelperCB);\
+    var context = this;
+    var newestSearch = function() { searchYouTube(data, context.searchHelperCB); };
+    _.debounce(newestSearch, 500 )();
+    //searchYouTube(data, this.searchHelperCB);
   }
+  
   searchHelperCB(data) {
     console.log('DATA', data);
     this.setState({
@@ -34,9 +48,9 @@ class App extends React.Component {
   
   handleClick(curVid) {
     //need to change the current video
-    this.setState({
-      currentVid: curVid
-    });
+    // var debouncedClick = function() { context.setState({currentVid: curVid}); };
+    // _.debounce(debouncedClick, 500);
+    this.setState({currentVid: curVid});
   }
   
   render () {

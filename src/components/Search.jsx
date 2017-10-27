@@ -1,7 +1,7 @@
 var Search = (props) => (
 // need to change this to a class
   <div className="search-bar form-inline">
-    <input className="form-control" type="text" />
+    <input onKeyUp={() => props.searchButton($('input').val())} className="form-control" type="text" />
     <button onClick= {() => props.searchButton($('input').val())} className="btn hidden-sm-down">
       <span className="glyphicon glyphicon-search"></span>
     </button>
